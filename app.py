@@ -2,50 +2,44 @@ from flask import Flask, render_template, request
 import requests
 from datetime import datetime
 from matplotlib import pyplot as plt
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # x_time = [0,1,2,3,4,5,6]
-    # y_temp = [18,15,13,9,8,8,11]
-    # plt.plot(x_time,y_temp)
-    # plt.savefig('test_chart')
-
-
-    return render_template('home.html')
-
-
-@app.route('/result', methods=["GET", "POST"])
-def result():
     api_key = "b05f3500420020c6982dfa7baff61234"
-    form_city = request.form.get('city')
-    url = "http://api.openweathermap.org/data/2.5/weather?q=" + form_city + "&APPID=" + api_key
+    form_city = "Adelaide"
+    url = "http://api.openweathermap.org/data/2.5/forecast?q=" + form_city + "&APPID=" + api_key
     response = requests.get(url).json()
     print(url)
-
-    weather_list = response.get("weather",)
-    weather_one = weather_list[0]
-    timezone = response.get("timezone")
-    description = weather_one.get("description")
-    temp_k = response.get("main", {}).get("temp")
-    temp_c = int(temp_k) - 273.15
-    wind_speed = response.get("wind", {}).get("speed")
+    forecast_list = response["list"]
+    print(forecast_list)
 
 
+    forecast_data = []
+    index = 0
+    while index <len(forecast_list):
+
+        dt_txt = forecast_list[index]["dt_txt"]
+        temp = forecast_list[index]["main"]["temp"]
+        desc = forecast_list[index]["weather"][0]["main"]
+        icon = forecast_list[index]["weather"][0]["icon"]
 
 
 
-    weather_dict = {
-        'timezone': timezone,
-        'description': description,
-        'temp_k': temp_k,
-        'temp_c': temp_c,
-        'wind_speed': wind_speed
-    }
+        thisdict = {
+            "dt_txt": dt_txt,
+            "temp": temp,
+            "desc": desc,
+            "icon_url": "http://openweathermap.org/img/w/" + icon + ".png"
+        }
+        forecast_data.append(thisdict)
+        index += 8
+        print(forecast_data)
 
-    return render_template('result.html', response=response, weather_dict=weather_dict)
 
+
+    return render_template('home.html', forecast_data=forecast_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
