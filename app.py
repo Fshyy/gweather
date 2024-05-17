@@ -26,10 +26,19 @@ def index():
         icon = forecast_list[index]["weather"][0]["icon"]
 
 
+        # Convert the string to a datetime object
+        date_object = datetime.strptime(dt_txt, '%Y-%m-%d %H:%M:%S')
+        # Get the day of the week (0 = Monday, 1 = Tuesday, ..., 6 = Sunday)
+        day_of_week = date_object.weekday()
+        print(day_of_week)
+        # You can also get the day name
+        day_name = date_object.strftime('%A')
+        print(day_name)
+
 
         thisdict = {
             "dt_txt": dt_txt,
-            "temp": temp,
+            "temp": int(temp) - 273,
             "desc": desc,
             "icon_url": "http://openweathermap.org/img/w/" + icon + ".png"
         }
@@ -40,6 +49,7 @@ def index():
 
 
     return render_template('home.html', forecast_data=forecast_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

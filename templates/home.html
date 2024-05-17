@@ -1,30 +1,21 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Information</title>
-</head>
-<body>
-    <h1>Current Weather</h1>
-    <p>Description: </p>
-    <p>Temperature: °C</p>
-    <p>Wind Speed:  m/s</p>
-</body>
-</html>
+
 
 
 
@@ -43,50 +34,70 @@
   <div class="card-body">
       <div class="row">
           <div class="col">
-              <img src="static/sun.png"/>
-              <img src="static/Sunny.png"/>
-              <img src="static/cloud-rain.png"/>
+
+
+    <h1>Current Weather</h1>
+    <p>Description: {{ forecast_data[0]["desc"] }} </p>
+    <p>Temperature: {{ forecast_data[0]["temp"] }} °C  </p>
+    <p>Wind Speed:  m/s</p>
+
 
           </div>
           <div class="col">
-              {{ forecast_data[0]["icon_url"] }}
               <br>
               {{ forecast_data[0]["desc"] }}
               <img src = "{{ forecast_data[0]['icon_url'] }}">
 
+
+
           </div>
       </div>
+
       <div class="row">
+
+
+
 
       </div>
       <div class="row">
+
           <div class="col">
-              Mon
+                 Temp: {{ forecast_data[1]["temp"] }} °C<br>
+              <img src = "{{ forecast_data[1]['icon_url'] }}"><br>
+              Description: {{ forecast_data[1]["desc"] }}
+
+
+
           </div>
           <div class="col">
-              Tue
+
+            Temp: {{ forecast_data[2]["temp"] }} °C <br>
+              <img src = "{{ forecast_data[2]['icon_url'] }}"><br>
+              Description: {{ forecast_data[2]["desc"] }}<br>
+
           </div>
           <div class="col">
-              Wed
+              Temp: {{ forecast_data[3]["temp"] }} °C<br>
+              <img src = "{{ forecast_data[3]['icon_url'] }}"><br>
+              Description: {{ forecast_data[3]["desc"] }}<br>
+
           </div>
           <div class="col">
-              Thu
+            Temp: {{ forecast_data[4]["temp"] }} °C<br>
+              <img src = "{{ forecast_data[4]['icon_url'] }}"><br>
+              Description: {{ forecast_data[4]["desc"] }}<br>
           </div>
           <div class="col">
-              Fri
-          </div>
-          <div class="col">
-              Sat
-          </div>
-           <div class="col">
-              Sun
+              Temp: {{ forecast_data[4]["temp"] }} °C<br>
+              <img src = "{{ forecast_data[4]['icon_url'] }}"><br>
+              Description: {{ forecast_data[4]["desc"] }}<br>
+
           </div>
       </div>
 
   </div>
 </div>
 
-
-{% endblock %}
+{{ forecast_data }}
 
 
